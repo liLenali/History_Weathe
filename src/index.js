@@ -1,4 +1,4 @@
-//ТЕСТ
+//ТЕСТ___-История
 
 function getMonth(date) {
   let days = [
