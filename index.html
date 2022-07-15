@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="img/LOGO_min.jpg" />
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="src/styles.css" rel="stylesheet" type="text/css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+
+    <title>LiLena_HW_8</title>
+  </head>
+  <body>
+    <div class="card1" style="width: 80%">
+      <div class="card-top" style="width: 100%">
+        <div class="conteiner"></div>
+      </div>
+      <br />
+
+      <form class="search-form" id="search-form" style="width: 100%">
+        <input
+          type="search"
+          id="city-input"
+          style="width: 40%; min-width: min-content"
+          placeholder="Enter a city..."
+          autofocus="on"
+        />
+        <input
+          class="search-button"
+          id="search-button"
+          type="submit"
+          label="search"
+          value="Search"
+        />
+        <input
+          class="current-button"
+          id="current-button"
+          type="submit"
+          label="current"
+          value="Current"
+        />
+      </form>
+
+      <br />
+
+      <div class="card-grand" style="width: 12rem">
+        <div class="card-body">
+          <h2 class="city"><span id="result_city"></span></h2>
+          <h6 class="data" id="data">
+            <span id="last"></span><br />
+            <span id="result_weekDay"></span>
+            <span id="result_hours"></span>
+            <span id="result_min"></span>
+            <br />
+            <span id="result_month"></span>
+            <span id="result_day"></span>
+          </h6>
+          <h6 class="result_clouds" id="result_clouds"></h6>
+        </div>
+      </div>
+      <br />
+      <div class="card-center" style="width: 80%; min-width: min-content">
+        <div class="conteiner">
+          <div class="row">
+            <div class="col">
+              <!--<img id="imgCloud" src="img/sun_cloud.png" width="80px" alt="" />-->
+              <img id="icon" src="img/Appro2.gif" width="100px" alt="" />
+            </div>
+            <div class="col weather-temperature">
+              <h1>
+                <span class="result_temp" id="result_temp"></span>
+              </h1>
+              <span class="units"
+                ><a href="#" id="celsius-link" class="active">°C</a> |
+                <a href="#" id="fahrenheit-link">°F</a></span
+              >
+
+              <!--<h5>
+                <a href="#" class="cel-far" id="celsius-link"></a>
+                <a href="#" class="cel-far" id="fahrenheit-link"></a>
+              </h5>-->
+            </div>
+            <div class="col">
+              Humidity: <span id="result_humidity"></span>%
+              <div class="row">
+                <p class="result_wind" id="result_wind">Wind: km/h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="card-bottom" style="width: 100%">
+        <div class="conteiner">
+          <div class="row" style="width: 100%; min-width: min-content">
+            <div class="col" style="width: 18%; min-width: min-content">
+              <div class="row">
+                <p class="text-start" id="weekday-1"><b></b></p>
+              </div>
+              <img id="icon-1" src="img/Appro.gif" width="50%" alt="cloud" />
+              <div class="temp-forecast">
+                <span class="temp-max" id="temp-1"></span>
+                <span class="temp-min" id="temp-1i">11°C</span>
+              </div>
+            </div>
+            <div class="col" style="width: 18%; min-width: min-content">
+              <div class="row">
+                <p class="text-start" id="weekday-2"><b></b></p>
+              </div>
+              <img id="icon-2" src="img/Appro.gif" width="50%" alt="rain" />
+              <div class="temp-forecast">
+                <span class="temp-max" id="temp-2"></span>
+                <span class="temp-min" id="temp-2i">11°C</span>
+              </div>
+            </div>
+            <div class="col" style="width: 18%; min-width: min-content">
+              <div class="row">
+                <p class="text-start" id="weekday-3"><b></b></p>
+              </div>
+              <img id="icon-3" src="img/Appro.gif" width="50%" alt="sun" />
+              <div class="temp-forecast">
+                <span class="temp-max" id="temp-3"></span>
+                <span class="temp-min" id="temp-3i">11°C</span>
+              </div>
+            </div>
+            <div class="col" style="width: 18%; min-width: min-content">
+              <div class="row">
+                <p class="text-start" id="weekday-4"><b></b></p>
+              </div>
+              <img
+                id="icon-4"
+                src="img/Appro.gif"
+                width="50%"
+                alt="sun_cloud"
+              />
+              <div class="temp-forecast">
+                <span class="temp-max" id="temp-4"></span>
+                <span class="temp-min" id="temp-4i">11°C</span>
+              </div>
+            </div>
+            <div class="col" style="width: 18%; min-width: min-content">
+              <div class="row">
+                <p class="text-start" id="weekday-5"><b></b></p>
+              </div>
+              <img
+                id="icon-5"
+                src="img/Appro.gif"
+                width="50%"
+                alt="sun_rain_cloud"
+              />
+              <div class="temp-forecast">
+                <span class="temp-max" id="temp-5">25°C</span>
+                <span class="temp-min" id="temp-5i">11°C</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <footer>
+        This project was coded by <b>Elena Lytovchenko</b> and is
+        <a
+          href="https://github.com/liLenali/Vanilla_Weather"
+          target="_blank"
+          rel="noopener noreferrer"
+          >open-sourced on GitHub</a
+        >
+        and
+        <a
+          href="https://papaya-semolina-747c54.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >hosted on Netlify</a
+        >
+      </footer>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
