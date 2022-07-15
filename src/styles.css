@@ -10,25 +10,25 @@
   display: block;
   margin: 20px auto;
   padding: 20px;
-  background-color: rgb(228, 207, 207);
+  background-color: rgb(211, 240, 229);
   border: 1px solid #dadde1;
   border-radius: 4px;
 }
 .card-bottom {
-  background-color: rgb(228, 207, 207);
+  background-color: rgb(211, 240, 229);
 }
 .card-top {
-  background-color: rgb(228, 207, 207);
+  background-color: rgb(211, 240, 229);
 }
 .card-grand {
-  background-color: rgb(228, 207, 207);
+  background-color: rgb(211, 240, 229);
 }
 
 .card-center {
-  background-color: rgb(228, 207, 207);
+  background-color: rgb(211, 240, 229);
 }
 .card-form {
-  background-color: rgb(228, 207, 207);
+  background-color: rgb(211, 240, 229);
 }
 .search-button {
   width: 10%;
