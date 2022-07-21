@@ -184,6 +184,8 @@ function searchCity(city) {
     getForecast(res.data.coord);
     //
     //
+
+    HistoryP(res.data.coord);
   });
 }
 
@@ -339,6 +341,7 @@ function searchLocation(position) {
     );
     formatDate(res.data.dt * 1000);
     getForecast(res.data.coord);
+    //HistoryP(res.data.coord);
   });
 }
 //*************************** *
@@ -427,23 +430,26 @@ function Prognoz(position) {
 
 //*************************** *
 
-function getHistory() {
-  //event.preventDefault();
-  navigator.geolocation.getCurrentPosition(HistoryP);
-}
+//function getHistory() {
+//event.preventDefault();
+//navigator.geolocation.getCurrentPosition(HistoryP);
+//}
 
 function HistoryP(coordinates) {
-  let apiKeyP = "50e56fa212f8363db506fc2abece70d9";
-  console.log(coordinates);
+  let apiKeyH = "50e56fa212f8363db506fc2abece70d9";
+  let startH = 86400000;
+  let endH = 864000000;
+
+  console.log(startH);
   console.log("HHHHHHHHHHHHHHHHHH__________History_____");
 
-  let apiUrl = `https://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&start=${start}&end=${end}&appid=${apiKey}`;
-  // это АПИ для прогноза
-  axios.get(apiUrl).then((res) => {
-    console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
-    console.log(res.data.daily); // выводим прогноз на 8 дней массив
-    console.log(res.data.daily[0].temp.max);
-    formatDateHistory(res.data.dt * 1000);
+  let apiUrlH = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&start=${startH}&end=${endH}&appid=${apiKeyH}`;
+  // это АПИ для ИСТОРИИ
+  axios.get(apiUrlH).then((res) => {
+    //console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
+    //console.log(res.data.daily); // выводим прогноз на 8 дней массив
+    //console.log(res.data.daily[0].temp.max);
+    //formatDateHistory(res.data.dt * 1000);
     console.log("HHHHHHHHHHHHHHH");
   });
   //
