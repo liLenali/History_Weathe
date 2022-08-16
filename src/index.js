@@ -137,10 +137,11 @@ function formatDatePrognoz(timestamp) {
     min = "0" + min;
   }
 
-  //let day = date.getDate();
+  let day = date.getDate();
 
   let weekday = getWeekDayShort(date);
-  return weekday;
+  result = weekday + day;
+  return result;
 }
 //-----------------------------------------------
 function searchCity(city) {
@@ -148,6 +149,7 @@ function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then((res) => {
+    console.log("ФУНКЦИЯ ___  searchCity    res");
     console.log(res);
 
     let temperatureElement = document.querySelector("h1");
@@ -174,9 +176,11 @@ function searchCity(city) {
       `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
     );
     //imgClouds(clouds);
+    console.log("ШО это   ???    res.data.dt * 1000");
     console.log(res.data.dt * 1000);
     formatDate(res.data.dt * 1000);
-
+    console.log("НИЖЕ  formatDate(res.data.dt * 1000)");
+    console.log(formatDate(res.data.dt * 1000));
     //
     //
 
@@ -201,7 +205,7 @@ function getForecast(coordinates) {
     console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
     console.log(res.data.daily); // выводим прогноз на 8 дней массив
     console.log(res.data.daily[0].temp.max);
-    console.log("+++++++++++++++++++++++++++++++");
+    console.log("+++++++++++++++____________++++++++++++++++");
 
     //
     document.getElementById("temp-1").innerHTML =
@@ -308,6 +312,7 @@ function searchLocation(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=en&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then((res) => {
+    console.log("Функция searchLocation    res");
     console.log(res);
     console.log(res.data.main.temp);
     console.log(res.data.wind.speed);
@@ -359,8 +364,11 @@ function Prognoz(position) {
   //let apiUrlPP = `http://api.openweathermap.org/data/2.5/weather?lat=${latP}&lon=${lonP}&lang=en&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrlP).then((res) => {
+    console.log("res  ниже ");
     console.log(res);
+    console.log("res.data.list[1].main.temp   ниже");
     console.log(res.data.list[1].main.temp);
+
     console.log(res.data.list[1].wind.speed);
     console.log(res.data.list[1].weather[0].main);
     // эти данне надо пораспихивать в прогнозы выюрать с каким индексом будет подходящий день и час
@@ -437,41 +445,282 @@ function Prognoz(position) {
 
 function HistoryP(coordinates) {
   let apiKeyH = "50e56fa212f8363db506fc2abece70d9";
-  let startH = 86400000;
-  let endH = 864000000;
 
-  console.log(startH);
-  console.log("HHHHHHHHHHHHHHHHHH__________History_____");
+  console.log("____Начало функции   HistoryP _____");
 
-  let apiUrlH = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&start=${startH}&end=${endH}&appid=${apiKeyH}`;
+  let apiUrlH = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=day&units=metric&appid=${apiKeyH}`;
+  //let apiUrlH = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&start=${startH}&end=${endH}&appid=${apiKeyH}`;
   // это АПИ для ИСТОРИИ
   axios.get(apiUrlH).then((res) => {
-    //console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
-    //console.log(res.data.daily); // выводим прогноз на 8 дней массив
-    //console.log(res.data.daily[0].temp.max);
-    //formatDateHistory(res.data.dt * 1000);
-    console.log("HHHHHHHHHHHHHHH");
+    console.log(
+      "res.data  -сейчас должен быть сам массив__ПЕРВЫЙ раз печатаем"
+    );
+    console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
+    console.log("res.data.list");
+    console.log(res.data.list); //
+    console.log("res.data.list[0].main.temp");
+    console.log(res.data.list[0].main.temp);
+    endHys = res.data.list[0].dt * 1000;
+    console.log("endHys   res.data.list[0].dt");
+    console.log(endHys);
+
+    //*************начало вставки ******************
+
+    //let startH = 1643720400;
+    //formatDateHistory(startH);//пример значений
+    //let endHH = 1643806800;
+
+    let endHH = endHys / 1000; //в общем здесь, выяснили вчерашнюю дату и дату недели назад
+
+    let startH = endHH - 3600 * 24 * 7;
+
+    //);
+    console.log(" начало диапазона   startH");
+    console.log(startH);
+    console.log("formatDateHistory(startH) дата начала диапазона");
+    formatDateHistory(startH * 1000);
+    console.log(" конец диапазона   endHH");
+    console.log(endHH);
+    console.log("formatDateHistory(endHH) дата конца диапазона");
+    formatDateHistory(endHH * 1000);
+    //let cntH = 10; ////__________________________остановилась здесь
+    //
+    let apiUrlH_Week = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH}&end=${endHH}&appid=${apiKeyH}`;
+    // это АПИ для ИСТОРИИ
+    axios.get(apiUrlH_Week).then((res) => {
+      console.log(
+        "res.data  -сейчас должен быть сам ВНУТРИ !!!  массив ВТОРОЙ РАЗ!!!!!!! история за неделю"
+      );
+      console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
+      console.log("res.data.list   __ВНУТРИ__история за неделю");
+      console.log(res.data.list); //
+      console.log(
+        "res.data.list[0].dt  __ВНУТРИ_в это время была температура НАЧАЛО ДИАПАЗОНА "
+      );
+      formatDateHistory(res.data.list[0].dt * 1000);
+      console.log("res.data.list[0].main.temp  __ВНУТРИ");
+      console.log(res.data.list[0].main.temp);
+
+      console.log(
+        "res.data.list[168].dt  __ВНУТРИ_в это время была температура КОНЕЦ ДИАПАЗОНА "
+      );
+      formatDateHistory(res.data.list[168].dt * 1000);
+      console.log("res.data.list[168].main.temp  __ВНУТРИ");
+      console.log(res.data.list[168].main.temp);
+      console.log(
+        "********************************************************************"
+      );
+      for (let i = 0; i < 169; i = i + 24) {
+        //печатаем температуру за последнюю прошедщую неделю с щагом в 24 часа
+        console.log("res.data.list[" + i + "].dt");
+        formatDateHistory(res.data.list[i].dt * 1000);
+        console.log("res.data.list[" + i + "].main.temp");
+        console.log(res.data.list[i].main.temp);
+        console.log("*********************************");
+      }
+
+      ///  ---------------ТАБЛИЦА---первой недели с конца-------------
+
+      for (let i = 168; i > 0; i = i - 24) {
+        var dt =
+          getFormatDateHistory(res.data.list[i].dt * 1000) + " первая неделя";
+        var temp = res.data.list[i].main.temp;
+        let tr = "<tr>"; // создаем строку таблицы
+        tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
+        tr += "<td>" + temp + "</td>";
+        tr += "</td>";
+        $("#history > tbody:last-child").append(tr); // добавляем полученную строку в дом
+      }
+
+      ///  -------------конец --ТАБЛИЦы--- первой недели-------------
+      //
+
+      //+++++++++++++ начало второй вставки++++++++++
+      let endHH1 = startH; //в общем здесь, выяснили дату неделю назад
+
+      let startH1 = endHH1 - 3600 * 24 * 7;
+
+      //);
+      //console.log(" начало диапазона   startH1");
+      //console.log(startH1);
+      //console.log("formatDateHistory(startH1) дата начала диапазона");
+      //formatDateHistory(startH1 * 1000);
+      //console.log(" конец диапазона   endHH1");
+      //console.log(endHH1);
+      //console.log("formatDateHistory(endHH1) дата конца диапазона");
+      //formatDateHistory(endHH1 * 1000);
+
+      //
+      let apiUrlH_Week1 = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH1}&end=${endHH1}&appid=${apiKeyH}`;
+      // это АПИ для ИСТОРИИ
+      axios.get(apiUrlH_Week1).then((res) => {
+        //console.log(
+        // "res.data  -сейчас должен быть сам ВНУТРИ !!!  массив ВТОРОЙ РАЗ!!!!!!! история история за вторую неделю"
+        //);
+        //console.log(res.data); // здесь мы выводим наши данные откуда можно взять подневной и почасовой прогноз
+        //console.log("res.data.list   __ВНУТРИ__история за вторую неделю");
+        //console.log(res.data.list); //
+        //console.log(
+        // "res.data.list[0].dt  __ВНУТРИ_в это время была температура НАЧАЛО ДИАПАЗОНА "
+        //);
+        //formatDateHistory(res.data.list[0].dt * 1000);
+        //console.log("res.data.list[0].main.temp  __ВНУТРИ");
+        //console.log(res.data.list[0].main.temp);
+
+        //console.log(
+        // "res.data.list[168].dt  __ВНУТРИ_в это время была температура КОНЕЦ ДИАПАЗОНА "
+        //);
+        //formatDateHistory(res.data.list[168].dt * 1000);
+        //console.log("res.data.list[168].main.temp  __ВНУТРИ");
+        //console.log(res.data.list[168].main.temp);
+        //console.log(
+        //"********************************************************************"
+        //);
+        //for (let i = 0; i < 169; i = i + 24) {
+        //печатаем температуру за 2ю последнюю прошедщую неделю с щагом в 24 часа
+        //console.log("res.data.list[" + i + "].dt");
+        //formatDateHistory(res.data.list[i].dt * 1000);
+        //console.log("res.data.list[" + i + "].main.temp");
+        //console.log(res.data.list[i].main.temp);
+        //console.log("*********************************");
+        //}
+
+        ///  ---------------ТАБЛИЦА----второй недели------------
+
+        for (let i = 168; i > 0; i = i - 24) {
+          var dt =
+            getFormatDateHistory(res.data.list[i].dt * 1000) + " вторая неделя";
+          var temp = res.data.list[i].main.temp;
+          let tr = "<tr>"; // создаем строку таблицы
+          tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
+          tr += "<td>" + temp + "</td>";
+          tr += "</td>";
+          $("#history1 > tbody:last-child").append(tr); // добавляем полученную строку в дом
+        }
+
+        ///  -------------конец --ТАБЛИЦы--второй недели--------------
+
+        ////////////////начало третьей вставки
+        let endHH2 = startH1; //в общем здесь, выяснили дату неделю назад
+
+        let startH2 = endHH2 - 3600 * 24 * 7;
+
+        //
+        let apiUrlH_Week2 = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH2}&end=${endHH2}&appid=${apiKeyH}`;
+        // это АПИ для ИСТОРИИ
+        axios.get(apiUrlH_Week2).then((res) => {
+          ///  ---------------ТАБЛИЦА----третьей недели------------
+
+          for (let i = 168; i > 0; i = i - 24) {
+            var dt =
+              getFormatDateHistory(res.data.list[i].dt * 1000) +
+              " третья неделя";
+            var temp = res.data.list[i].main.temp;
+            let tr = "<tr>"; // создаем строку таблицы
+            tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
+            tr += "<td>" + temp + "</td>";
+            tr += "</td>";
+            $("#history2 > tbody:last-child").append(tr); // добавляем полученную строку в дом
+          }
+
+          ///  -------------конец --ТАБЛИЦы--третьей недели--------------
+
+          ////////////////начало четвертой вставки
+          let endHH3 = startH2; //в общем здесь, выяснили дату неделю назад
+
+          let startH3 = endHH3 - 3600 * 24 * 7;
+
+          //
+          let apiUrlH_Week3 = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH3}&end=${endHH3}&appid=${apiKeyH}`;
+          // это АПИ для ИСТОРИИ
+          axios.get(apiUrlH_Week3).then((res) => {
+            ///  ---------------ТАБЛИЦА----третьей недели------------
+
+            for (let i = 168; i > 0; i = i - 24) {
+              var dt =
+                getFormatDateHistory(res.data.list[i].dt * 1000) +
+                " четвертая неделя";
+              var temp = res.data.list[i].main.temp;
+              let tr = "<tr>"; // создаем строку таблицы
+              tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
+              tr += "<td>" + temp + "</td>";
+              tr += "</td>";
+              $("#history3 > tbody:last-child").append(tr); // добавляем полученную строку в дом
+            }
+
+            ///  -------------конец --ТАБЛИЦы--четвертой недели--------------
+          });
+          ////////////////конец четвертой вставки
+        });
+        ////////////////конец третьей вставки
+      });
+
+      //+++++++++++++ конец  второй вставки  ++++++++++
+    });
   });
+
   //
+
+  let today = new Date();
+  let value = today.valueOf();
+  console.log("value");
+  console.log(value);
+  console.log("дата, на основе value = .... ниже ");
+  formatDateHistory(value);
+
+  console.log("____Конец функции   HistoryP _____");
+  //__*****************__Конец функции   HistoryP _____
 }
 
 function formatDateHistory(timestamp) {
   let date = new Date(timestamp);
-  /*let hours = date.getHours();
+  let hours = date.getHours();
   if (hours < 10) {
     hours = "0" + hours;
   }
   let min = date.getMinutes();
   if (min < 10) {
     min = "0" + min;
-  }*/
+  }
   let year = date.getFullYear();
-  let month_1 = date.setMonth(d.getMonth() - 1);
+  let month_1 = getMonth(date);
   let day = date.getDate();
-  let resultDate = "_++_ DATA _++_" + day + " " + year + " ";
+  //console.log(date.getDate());
+  let resultDate =
+    "_++_ИСКОМАЯ ДАТА и время _++_" +
+    day +
+    " " +
+    month_1 +
+    " " +
+    year +
+    " " +
+    hours +
+    ":" +
+    min;
   //let weekday = getWeekDayShort(date);
   //return resultDate;
   console.log(resultDate);
+}
+
+function getFormatDateHistory(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  let min = date.getMinutes();
+  if (min < 10) {
+    min = "0" + min;
+  }
+  let year = date.getFullYear();
+  let month_1 = getMonth(date);
+  let day = date.getDate();
+  let weekday = getWeekDayShort(date);
+
+  let resultDate =
+    weekday + " " + day + " " + month_1 + " " + year + " " + hours + ":" + min;
+
+  return resultDate;
 }
 //******************************************************************** */
 //******************************************************************** */
@@ -512,6 +761,7 @@ function displayCelsiusTemperature(event) {
 }
 
 let celsiusTemperature = null;
+//let endH = 0;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
@@ -535,13 +785,18 @@ searchForm.addEventListener("submit", search);
 var currentLocationButton = document.querySelector("#current-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-console.log("*******************************");
-console.log("*******************************");
+//console.log("*******************************");
+//console.log("*******************************");
 //var currentLocationButtonP = document.querySelector("#current-buttonP");
 //currentLocationButtonP.addEventListener("click", getPrognoz);
-console.log("*******************************");
+//console.log("*******************************");
 //var currentLocationButtonP = document.querySelector("#current-buttonH");
 //currentLocationButtonP.addEventListener("click", getHistory);
-console.log("*******************************");
+//console.log("*******************************");
 searchCity("Odesa");
 //getPrognoz();
+//
+//
+//
+//
+//

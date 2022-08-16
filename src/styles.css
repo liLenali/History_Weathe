@@ -67,3 +67,42 @@
 .weather-temperature .active:hover {
   text-decoration: none;
 }
+
+table {
+  table-layout: fixed;
+  width: 60%;
+  border-collapse: collapse;
+  border: 2px solid #000;
+  text-align: center;
+  margin: auto; /*именно это выравнивает по центру*/
+}
+th {
+  font-weight: normal;
+  color: #039;
+  padding: 10px 15px;
+}
+td {
+  color: #669;
+  border-top: 1px solid #e8edff;
+  padding: 10px 15px;
+}
+tr:nth-child(2n) {
+  background: rgb(211, 240, 229);
+}
+tr:hover td {
+  background: rgb(187, 212, 203);
+}
+.caption {
+  caption-side: top;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 26px;
+  color: #039;
+}
+
+caption {
+  caption-side: top;
+  text-align: right;
+  padding: 10px 0;
+  font-size: 14px;
+}
