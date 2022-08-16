@@ -173,7 +173,7 @@ function searchCity(city) {
     let iconElement = document.querySelector("#icon");
     iconElement.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
     );
     //imgClouds(clouds);
     console.log("ШО это   ???    res.data.dt * 1000");
@@ -218,7 +218,7 @@ function getForecast(coordinates) {
     let iconElement1 = document.querySelector("#icon-1");
     iconElement1.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.daily[1].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.daily[1].weather[0].icon}@2x.png`
     );
 
     //
@@ -233,7 +233,7 @@ function getForecast(coordinates) {
     let iconElement2 = document.querySelector("#icon-2");
     iconElement2.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.daily[2].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.daily[2].weather[0].icon}@2x.png`
     );
 
     //
@@ -249,7 +249,7 @@ function getForecast(coordinates) {
     let iconElement3 = document.querySelector("#icon-3");
     iconElement3.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.daily[3].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.daily[3].weather[0].icon}@2x.png`
     );
 
     //
@@ -265,7 +265,7 @@ function getForecast(coordinates) {
     let iconElement4 = document.querySelector("#icon-4");
     iconElement4.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.daily[4].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.daily[4].weather[0].icon}@2x.png`
     );
 
     //
@@ -280,7 +280,7 @@ function getForecast(coordinates) {
     let iconElement5 = document.querySelector("#icon-5");
     iconElement5.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.daily[5].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.daily[5].weather[0].icon}@2x.png`
     );
 
     //
@@ -342,7 +342,7 @@ function searchLocation(position) {
     let iconElementL = document.querySelector("#icon");
     iconElementL.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
     );
     formatDate(res.data.dt * 1000);
     getForecast(res.data.coord);
@@ -381,7 +381,7 @@ function Prognoz(position) {
     let iconElement1 = document.querySelector("#icon-1");
     iconElement1.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.list[9].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.list[9].weather[0].icon}@2x.png`
     );
 
     //
@@ -393,7 +393,7 @@ function Prognoz(position) {
     let iconElement2 = document.querySelector("#icon-2");
     iconElement2.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.list[17].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.list[17].weather[0].icon}@2x.png`
     );
     //
 
@@ -405,7 +405,7 @@ function Prognoz(position) {
     let iconElement3 = document.querySelector("#icon-3");
     iconElement3.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.list[24].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.list[24].weather[0].icon}@2x.png`
     );
     //
 
@@ -417,7 +417,7 @@ function Prognoz(position) {
     let iconElement4 = document.querySelector("#icon-4");
     iconElement4.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.list[33].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.list[33].weather[0].icon}@2x.png`
     );
     //
 
@@ -429,7 +429,7 @@ function Prognoz(position) {
     let iconElement5 = document.querySelector("#icon-5");
     iconElement5.setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${res.data.list[39].weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${res.data.list[39].weather[0].icon}@2x.png`
     );
   });
 }
@@ -448,7 +448,7 @@ function HistoryP(coordinates) {
 
   console.log("____Начало функции   HistoryP _____");
 
-  let apiUrlH = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=day&units=metric&appid=${apiKeyH}`;
+  let apiUrlH = `https://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=day&units=metric&appid=${apiKeyH}`;
   //let apiUrlH = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&start=${startH}&end=${endH}&appid=${apiKeyH}`;
   // это АПИ для ИСТОРИИ
   axios.get(apiUrlH).then((res) => {
@@ -485,7 +485,7 @@ function HistoryP(coordinates) {
     formatDateHistory(endHH * 1000);
     //let cntH = 10; ////__________________________остановилась здесь
     //
-    let apiUrlH_Week = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH}&end=${endHH}&appid=${apiKeyH}`;
+    let apiUrlH_Week = `https://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH}&end=${endHH}&appid=${apiKeyH}`;
     // это АПИ для ИСТОРИИ
     axios.get(apiUrlH_Week).then((res) => {
       console.log(
@@ -551,7 +551,7 @@ function HistoryP(coordinates) {
       //formatDateHistory(endHH1 * 1000);
 
       //
-      let apiUrlH_Week1 = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH1}&end=${endHH1}&appid=${apiKeyH}`;
+      let apiUrlH_Week1 = `https://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH1}&end=${endHH1}&appid=${apiKeyH}`;
       // это АПИ для ИСТОРИИ
       axios.get(apiUrlH_Week1).then((res) => {
         //console.log(
@@ -606,7 +606,7 @@ function HistoryP(coordinates) {
         let startH2 = endHH2 - 3600 * 24 * 7;
 
         //
-        let apiUrlH_Week2 = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH2}&end=${endHH2}&appid=${apiKeyH}`;
+        let apiUrlH_Week2 = `https://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH2}&end=${endHH2}&appid=${apiKeyH}`;
         // это АПИ для ИСТОРИИ
         axios.get(apiUrlH_Week2).then((res) => {
           ///  ---------------ТАБЛИЦА----третьей недели------------
@@ -631,7 +631,7 @@ function HistoryP(coordinates) {
           let startH3 = endHH3 - 3600 * 24 * 7;
 
           //
-          let apiUrlH_Week3 = `http://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH3}&end=${endHH3}&appid=${apiKeyH}`;
+          let apiUrlH_Week3 = `https://history.openweathermap.org/data/2.5/history/city?lat=${coordinates.lat}&lon=${coordinates.lon}&type=hour&units=metric&start=${startH3}&end=${endHH3}&appid=${apiKeyH}`;
           // это АПИ для ИСТОРИИ
           axios.get(apiUrlH_Week3).then((res) => {
             ///  ---------------ТАБЛИЦА----третьей недели------------
