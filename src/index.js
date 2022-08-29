@@ -522,8 +522,7 @@ function HistoryP(coordinates) {
       ///  ---------------ТАБЛИЦА---первой недели с конца-------------
 
       for (let i = 168; i > 0; i = i - 24) {
-        var dt =
-          getFormatDateHistory(res.data.list[i].dt * 1000) + " первая неделя";
+        var dt = getFormatDateHistory(res.data.list[i].dt * 1000);
         var temp = res.data.list[i].main.temp;
         let tr = "<tr>"; // создаем строку таблицы
         tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
@@ -588,8 +587,7 @@ function HistoryP(coordinates) {
         ///  ---------------ТАБЛИЦА----второй недели------------
 
         for (let i = 168; i > 0; i = i - 24) {
-          var dt =
-            getFormatDateHistory(res.data.list[i].dt * 1000) + " вторая неделя";
+          var dt = getFormatDateHistory(res.data.list[i].dt * 1000);
           var temp = res.data.list[i].main.temp;
           let tr = "<tr>"; // создаем строку таблицы
           tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
@@ -612,9 +610,7 @@ function HistoryP(coordinates) {
           ///  ---------------ТАБЛИЦА----третьей недели------------
 
           for (let i = 168; i > 0; i = i - 24) {
-            var dt =
-              getFormatDateHistory(res.data.list[i].dt * 1000) +
-              " третья неделя";
+            var dt = getFormatDateHistory(res.data.list[i].dt * 1000);
             var temp = res.data.list[i].main.temp;
             let tr = "<tr>"; // создаем строку таблицы
             tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
@@ -637,9 +633,7 @@ function HistoryP(coordinates) {
             ///  ---------------ТАБЛИЦА----третьей недели------------
 
             for (let i = 168; i > 0; i = i - 24) {
-              var dt =
-                getFormatDateHistory(res.data.list[i].dt * 1000) +
-                " четвертая неделя";
+              var dt = getFormatDateHistory(res.data.list[i].dt * 1000);
               var temp = res.data.list[i].main.temp;
               let tr = "<tr>"; // создаем строку таблицы
               tr += "<td>" + dt + "</td>"; // добавляем столбцы в строку
